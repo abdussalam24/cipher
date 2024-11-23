@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    select, input, button, textarea {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    textarea {
+      resize: none;
+    }
+    .cipher-section {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cipher Tool</h1>
+    <label for="cipher-select">Choose a Cipher:</label>
+    <select id="cipher-select" onchange="showCipherSection()">
+      <option value="" selected disabled>Select a Cipher</option>
+      <option value="caesar">Caesar Cipher</option>
+      <option value="rsa">RSA Cipher</option>
+      <option value="rail-fence">Rail Fence Cipher</option>
+      <option value="playfair">Playfair Cipher</option>
+      <option value="elgamal">ElGamal Cipher</option>
+    </select>
+
+    <!-- Caesar Cipher -->
+    <div class="cipher-section" id="caesar-cipher">
+      <h2>Caesar Cipher</h2>
+      <input type="text" id="caesar-plaintext" placeholder="Enter Plaintext">
+      <input type="number" id="caesar-shift" placeholder="Enter Shift Value">
+      <button onclick="caesarEncrypt()">Encrypt</button>
+      <button onclick="caesarDecrypt()">Decrypt</button>
+      <textarea id="caesar-output" rows="3" readonly placeholder="Output will appear here"></textarea>
+    </div>
+
+    <!-- RSA Cipher -->
+    <div class="cipher-section" id="rsa-cipher">
+      <h2>RSA Cipher</h2>
+      <input type="text" id="rsa-plaintext" placeholder="Enter Plaintext">
+      <input type="number" id="rsa-p" placeholder="Enter Prime Number (p)">
+      <input type="number" id="rsa-q" placeholder="Enter Prime Number (q)">
+      <input type="number" id="rsa-e" placeholder="Enter Public Key (e)">
+      <button onclick="rsaEncrypt()">Encrypt</button>
+      <button onclick="rsaDecrypt()">Decrypt</button>
+      <textarea id="rsa-output" rows="3" readonly placeholder="Output will appear here"></textarea>
+    </div>
+
+    <!-- Rail Fence Cipher -->
+    <div class="cipher-section" id="rail-fence-cipher">
+      <h2>Rail Fence Cipher</h2>
+      <input type="text" id="rail-plaintext" placeholder="Enter Plaintext">
+      <input type="number" id="rail-rails" placeholder="Enter Number of Rails">
+      <button onclick="railFenceEncrypt()">Encrypt</button>
+      <button onclick="railFenceDecrypt()">Decrypt</button>
+      <textarea id="rail-output" rows="3" readonly placeholder="Output will appear here"></textarea>
+    </div>
+
+    <!-- Playfair Cipher -->
+    <div class="cipher-section" id="playfair-cipher">
+      <h2>Playfair Cipher</h2>
+      <input type="text" id="playfair-plaintext" placeholder="Enter Plaintext">
+      <input type="text" id="playfair-key" placeholder="Enter Keyword">
+      <button onclick="playfairEncrypt()">Encrypt</button>
+      <button onclick="playfairDecrypt()">Decrypt</button>
+      <textarea id="playfair-output" rows="3" readonly placeholder="Output will appear here"></textarea>
+    </div>
+
+    <!-- ElGamal Cipher -->
+    <div class="cipher-section" id="elgamal-cipher">
+      <h2>ElGamal Cipher</h2>
+      <input type="number" id="elgamal-p" placeholder="Enter a Prime Number (p)">
+      <input type="number" id="elgamal-g" placeholder="Enter Generator (g)">
+      <input type="number" id="elgamal-x" placeholder="Enter Private Key (x)">
+      <input type="text" id="elgamal-plaintext" placeholder="Enter Plaintext">
+      <button onclick="elgamalEncrypt()">Encrypt</button>
+      <textarea id="elgamal-encrypted" rows="3" readonly placeholder="Encrypted output will appear here"></textarea>
+      <input type="number" id="elgamal-k" placeholder="Enter Random Key (k)">
+      <textarea id="elgamal-decrypted" rows="3" readonly placeholder="Decrypted output will appear here"></textarea>
+      <button onclick="elgamalDecrypt()">Decrypt</button>
+    </div>
+  </div>
+
+  <script>
+    function showCipherSection() {
+      const sections = document.querySelectorAll(".cipher-section");
+      const selectedCipher = document.getElementById("cipher-select").value;
+
+      sections.forEach(section => {
+        section.style.display = "none";
+      });
+
+      const activeSection = document.getElementById(`${selectedCipher}-cipher`);
+      if (activeSection) {
+        activeSection.style.display = "block";
+      }
+    }
+  </script>
+  <script src="ciphers.js"></script>
+</body>
+</html>
